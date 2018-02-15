@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<h1>Education</h1>
+
+<div th:each="education : ${educations}">
+<span th:inline="text">Achievement: [[${education.achievement}]]<br /></span>
+<span th:inline="text">School: [[${education.school}]]<br /></span>
+<span th:inline="text">Graduation year: [[${education.gradyear}]]<br /></span>
+
+</div>
+<a class="btn btn-primary btn-small" href="/edu" role="button">Add Education</a><br />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</body>
+</html>
