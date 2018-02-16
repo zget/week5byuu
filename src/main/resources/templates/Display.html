@@ -3,19 +3,42 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
 </head>
 <body>
-<h1>Education</h1>
+
+<div th:replace="index :: navbarf"></div>
+
+<h2>Education</h2>
 
 <div th:each="education : ${educations}">
-<span th:inline="text">Achievement: [[${education.achievement}]]<br /></span>
+<span th:inline="text">Achievement: [[${education.achievement}]]<br/></span>
 <span th:inline="text">School: [[${education.school}]]<br /></span>
-<span th:inline="text">Graduation year: [[${education.gradyear}]]<br /></span>
+<span th:inline="text">Graduation year: [[${education.gradyear}]]<br/></span>
+
+
+
+<a  th:href="@{/edu}" >Add Education</a><br/>
+<a  th:href="@{/}" >Go to Home</a><br/>
+<a  th:href="@{/update/{id}(id=${education.id})}" >Update Education</a><br/>
 
 </div>
-<a class="btn btn-primary btn-small" href="/edu" role="button">Add Education</a><br />
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<h1>Experience</h1>
 
+<div th:each="experience : ${experiences}">
+    <span th:inline="text">Position: [[${experience.position}]]<br/></span>
+    <span th:inline="text">Company: [[${experience.company}]]<br /></span>
+    <span th:inline="text">Service year: [[${experience.serviceyear}]]<br/></span>
+    <span th:inline="text">Duties: [[${experience.duty}]]<br/></span>
+</div>
+<a class="btn btn-primary btn-small" th:href="@{/edu}" role="button">Add Experience</a><br/>
+<a class="btn btn-primary btn-small" th:href="@{/}" role="button">Go to Home></a>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

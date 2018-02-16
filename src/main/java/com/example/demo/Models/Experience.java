@@ -17,13 +17,55 @@ public class Experience {
     //@NotEmpty
     private String position;
 
-   // @NotEmpty
-    private String comapany;
+   //@NotEmpty
+    private String company;
 
     //@NotEmpty
     private int serviceyear;
 
-    //@NotEmpty
+   // @NotEmpty
     private String duty;
 
+    public Experience() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setComapany(String comapany) {
+        this.company = comapany;
+    }
+
+    public int getServiceyear() {
+        return serviceyear;
+    }
+
+    public void setServiceyear(int serviceyear) {
+        this.serviceyear = serviceyear;
+    }
+
+    public String getDuty() {
+        return duty;
+    }
+
+    public void setDuty(String duty) {
+        this.duty = duty;
+    }
 }

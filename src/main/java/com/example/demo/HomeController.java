@@ -2,6 +2,7 @@ package com.example.demo;
 
 
 import com.example.demo.Models.Education;
+import com.example.demo.Models.Experience;
 import com.example.demo.Repositories.EduRepository;
 import com.example.demo.Repositories.ExpRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class HomeController {
         return "index";
     }
 
+
     @GetMapping("/edu")
     public String loadEduform(Model model){
 
@@ -48,14 +50,48 @@ public class HomeController {
 
 
 
+    @RequestMapping("/update/{id}")
+    public String updateListing(@PathVariable("id") long id, Model model) {
+        model.addAttribute("education", eduRepository.findOne(id));
+
+        return "Eduform";
+
+    }
+
+    @GetMapping("/exp")
+    public String loadExpform(Model model){
+
+        model.addAttribute("experience", new Experience());
+
+        return "Expform";
+    }
+
+    @PostMapping("/exp")
+    public String processExpform(@Valid @ModelAttribute("experience") Experience experience, BindingResult result, Model model){
+
+        if(result.hasErrors())
+            return "Expform";
+        expRepository.save(experience);
+        model.addAttribute("experience", expRepository);
+        return "redirect:/displayexp";
+    }
+
+
+//    @RequestMapping("/displayexp")
+//    public String listexp( Model model) {
+//
+//        model.addAttribute("experiences", expRepository.findAll());
+//        return "Listexp";
+//    }
 
     @RequestMapping("/display")
     public String details( Model model) {
 
         model.addAttribute("educations", eduRepository.findAll());
+        model.addAttribute("experiences", expRepository.findAll());
         return "Display";
     }
-
+//
 
 
 }
