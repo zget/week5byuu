@@ -3,50 +3,85 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
-    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css"/>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+
 </head>
 <body>
 
-<div th:fragement="navbarf" >
-<nav class="navbar navbar-expand-sm bg-light" >
-    <!-- Links -->
-    <img class="navbar-brand" src="logo.png" alt="logo"/>
-    <ul class="navbar-nav">
+<div th:fragment="navlinks">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" >
 
-        <li class="nav-item">
-            <a class="nav-link" th:href="@{/contact}">Contact</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" th:href="@{/edu}">Education</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" th:href="@{/exp}">Experience</a>
-        </li>
+        <!--<img class="navbar-brand" src="logo.png" alt="logo"/>-->
+    <!--<div> <img src="/image/mypic.jpg" width="100" height="100" class="d-inline-block align-top" alt="logo"/></div>-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-        <li class="nav-item">
-            <a class="nav-link" th:href="@{/skill}">Skill</a>
-        </li>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/summary}">Summary</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/contact}">Contact</a>
+                </li>
 
-        <li class="nav-item">
-            <a class="nav-link" th:href="@{/refer}">Reference</a>
-        </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/edu}">Education</a>
+                </li>
 
-        <li class="nav-item">
-            <a class="nav-link" th:href="@{/display}">Display</a>
-        </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/skill}">Skill</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/exp}">Experience</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/refer}">Reference</a>
+                </li>
 
 
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        View
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" th:href="@{/display}">Completed Resume</a>
+                        <a class="dropdown-item" th:href="@{/coverletter}">Cover Letter</a>
+                    </div>
+                </li>
 
-    </ul>
-</nav>
+                <!--<li class="nav-item " >-->
+                    <!--<a class="nav-link" th:href="@{/login}">Login</a>-->
+                <!--</li>-->
+                <!--<li class="nav-item " >-->
+                    <!--<a class="nav-link" th:href="@{/registration}">Sign Up</a>-->
+                <!--</li>-->
+
+
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a th:href="@{/registration}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+
+                <!--<li><a th:href="@{/logout}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>-->
+            </ul>
+
+        </div>
+    </nav>
 </div>
 
-<a class="btn btn-primary btn-small" href="/registration" role="button">Register New User</a><br />
+
+
+
 
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
 </body>
 </html>

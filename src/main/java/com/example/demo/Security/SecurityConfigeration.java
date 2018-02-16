@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -29,16 +30,17 @@ public class SecurityConfigeration extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers("/","/login","/h2-console/**","registration").permitAll()
-                .antMatchers("/")
-                .access("hasAuthority('USER') or hasAuthority('ADMIN')")
-                .antMatchers("/admin").access("hasAuthority('ADMIN')")
-                .anyRequest()
+                .antMatchers("summary","/","/login","/h2-console/**","/registration").permitAll()
+//                .antMatchers("/edu","/exp","/skill","/reference","/display","contact").access("hasAuthority('ADMIN')")
+//               .antMatchers("/display").access("hasAuthority('USER')")
+               .anyRequest()
                 .authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
+                .formLogin().loginPage("/login").permitAll()
+
+                .and()
+                .logout().logoutRequestMatcher(
+                        new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll()
                 .and()
                 .httpBasic();
         http
@@ -54,9 +56,9 @@ public class SecurityConfigeration extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception{
         auth.inMemoryAuthentication()
-                .withUser("user").password("password").authorities("USER")
-                .and()
-                .withUser("rodas").password("master").authorities("ADMIN");
+//                .withUser("admin").password("password").authorities("ADMIN")
+//                .and()
+                .withUser("user").password("password").authorities("USER");
         auth
                 .userDetailsService(userDetailsServiceBean());
     }

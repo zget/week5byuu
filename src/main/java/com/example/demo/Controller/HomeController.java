@@ -3,12 +3,17 @@ package com.example.demo.Controller;
 import com.example.demo.Security.*;
 import com.example.demo.Models.*;
 import com.example.demo.Repositories.*;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @Controller
@@ -34,17 +39,23 @@ public class HomeController {
     private UserService userService;
 
 
-    @RequestMapping("/login")
-    public String showLogin(Model model) {
-        return "login";
-    }
 
     @RequestMapping("/")
     public String index(){
 
         return "index";
     }
+    @RequestMapping("/login")
+    public String login(){
 
+        return "login";
+    }
+
+    @RequestMapping("/registration")
+    public String signup(){
+
+        return "registration";
+    }
 
     @GetMapping("/edu")
     public String loadEduform(Model model){
@@ -187,6 +198,17 @@ public class HomeController {
         return "Display";
     }
 
+    @RequestMapping("/summary")
+    public String summuryInfo( Model model) {
+
+               return "Summary";
+    }
+    @RequestMapping("/coverletter")
+    public String coverInfo( Model model) {
+
+        return "Coverletter";
+    }
+
 
     @GetMapping("/registration")
     public String newUser(Model model){
@@ -201,8 +223,17 @@ public class HomeController {
             return "Registration";
         }
         userService.saveUser(user);
-        return "redirect:/";
+        model.addAttribute("message", "User account Successfully Created");
+        return "redirect:/login";
     }
+
+
+    @GetMapping("/login")
+    public String newUserLogin(Model model){
+        model.addAttribute("user", new User());
+        return "login";
+    }
+
 
 
 
