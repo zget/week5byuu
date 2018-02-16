@@ -1,10 +1,8 @@
 package com.example.demo;
 
 
-import com.example.demo.Models.Education;
-import com.example.demo.Models.Experience;
-import com.example.demo.Repositories.EduRepository;
-import com.example.demo.Repositories.ExpRepository;
+import com.example.demo.Models.*;
+import com.example.demo.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +19,15 @@ public class HomeController {
 
     @Autowired
     ExpRepository  expRepository;
+
+    @Autowired
+    ContactRepository contactRepository;
+
+    @Autowired
+    SkillRepository skillRepository;
+
+    @Autowired
+    ReferenceRepository referenceRepository;
 
     @RequestMapping("/")
     public String index(){
@@ -44,19 +51,63 @@ public class HomeController {
             return "Eduform";
         eduRepository.save(education);
         model.addAttribute("education", eduRepository);
-        return "redirect:/display";
+        return "redirect:/";
+    }
+
+    @GetMapping("/contact")
+    public String loadContactform(Model model){
+
+        model.addAttribute("contact", new ContactInfo());
+
+        return "Contactform";
+    }
+
+    @PostMapping("/contact")
+    public String processEduform(@Valid @ModelAttribute("contact") ContactInfo contact, BindingResult result, Model model){
+
+        if(result.hasErrors())
+            return "Contactform";
+        contactRepository.save(contact);
+        model.addAttribute("contact", contactRepository);
+        return "redirect:/";
     }
 
 
+    @RequestMapping("/update/refer/{id}")
+    public String updateReference(@PathVariable("id") long id, Model model) {
+        model.addAttribute("reference", referenceRepository.findOne(id));
 
+        return "Referform";
+    }
 
-    @RequestMapping("/update/{id}")
-    public String updateListing(@PathVariable("id") long id, Model model) {
+    @RequestMapping("/update/edu/{id}")
+    public String updateEducation(@PathVariable("id") long id, Model model) {
         model.addAttribute("education", eduRepository.findOne(id));
 
         return "Eduform";
 
     }
+    @RequestMapping("/update/exp/{id}")
+    public String updateExperience(@PathVariable("id") long id, Model model) {
+        model.addAttribute("experience", expRepository.findOne(id));
+
+        return "Expform";
+    }
+
+    @RequestMapping("/update/skill/{id}")
+    public String updateKill(@PathVariable("id") long id, Model model) {
+        model.addAttribute("skill", skillRepository.findOne(id));
+
+        return "Skillform";
+    }
+
+    @RequestMapping("/update/contact/{id}")
+    public String updateContact(@PathVariable("id") long id, Model model) {
+        model.addAttribute("contact", contactRepository.findOne(id));
+
+        return "Contactform";
+    }
+
 
     @GetMapping("/exp")
     public String loadExpform(Model model){
@@ -73,22 +124,56 @@ public class HomeController {
             return "Expform";
         expRepository.save(experience);
         model.addAttribute("experience", expRepository);
-        return "redirect:/displayexp";
+        return "redirect:/";
+    }
+
+    @GetMapping("/skill")
+    public String loadskillform(Model model){
+
+        model.addAttribute("skill", new Skill());
+
+        return "Skillform";
+    }
+
+    @PostMapping("/skill")
+    public String processskillform(@Valid @ModelAttribute("skill") Skill skill, BindingResult result, Model model){
+
+        if(result.hasErrors())
+            return "Skillform";
+        skillRepository.save(skill);
+        model.addAttribute("skill", skillRepository);
+        return "redirect:/";
     }
 
 
-//    @RequestMapping("/displayexp")
-//    public String listexp( Model model) {
-//
-//        model.addAttribute("experiences", expRepository.findAll());
-//        return "Listexp";
-//    }
+    @GetMapping("/refer")
+    public String loadReferform(Model model){
+
+        model.addAttribute("reference", new Reference());
+
+        return "Referform";
+    }
+
+    @PostMapping("/refer")
+    public String procesReferform(@Valid @ModelAttribute("reference") Reference reference, BindingResult result, Model model){
+
+        if(result.hasErrors())
+            return "Referform";
+        referenceRepository.save(reference);
+        model.addAttribute("reference", referenceRepository);
+        return "redirect:/";
+    }
+
 
     @RequestMapping("/display")
     public String details( Model model) {
 
         model.addAttribute("educations", eduRepository.findAll());
         model.addAttribute("experiences", expRepository.findAll());
+        model.addAttribute("contacts", contactRepository.findAll());
+        model.addAttribute("skills", skillRepository.findAll());
+        model.addAttribute("references", referenceRepository.findAll());
+
         return "Display";
     }
 //

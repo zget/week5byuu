@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+
+<form
+        action="#"
+        th:action="@{/refer}"
+        th:object="${reference}"
+        method="post">
+    <input type="hidden" th:field="*{id}" />
+
+    firstname : <input type="text" th:field="*{firstname}" />
+    <span th:if="${#fields.hasErrors('firstname')}"
+          th:errors="*{firstname}"></span><br />
+
+    lastname : <input type="text" th:field="*{lastname}" />
+    <span th:if="${#fields.hasErrors('lastname')}"
+          th:errors="*{lastname}"></span><br />
+
+    email : <input type="text" th:field="*{email}" />
+    <span th:if="${#fields.hasErrors('email')}"
+          th:errors="*{email}"></span><br />
+
+    phone : <input type="text" th:field="*{phone}" />
+    <span th:if="${#fields.hasErrors('phone')}"
+          th:errors="*{phone}"></span><br />
+
+
+    <input type="submit" value="Submit" />
+
+</form>
+
+</body>
+</html>

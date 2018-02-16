@@ -1,6 +1,6 @@
 package com.example.demo.Models;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,34 +8,25 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class
-Reference {
-
+public class ContactInfo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
 
-   // @NotEmpty
+    // @NotEmpty
     private String firstname;
 
-    //@NotEmpty
+    // @NotEmpty
     private String lastname;
 
     //@NotEmpty
     private String email;
-    //NotEmpty
+
+    // @NotEmpty
     private String phone;
 
-    public Reference() {
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public ContactInfo() {
     }
 
     public long getId() {
@@ -68,5 +59,13 @@ Reference {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

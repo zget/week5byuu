@@ -10,31 +10,61 @@
 
 <div th:replace="index :: navbarf"></div>
 
-<h2>Education</h2>
+
+<h3>Contact Information</h3>
+<div th:each="contact : ${contacts}">
+    <span th:inline="text">firstname: [[${contact.firstname}]]<br/></span>
+    <span th:inline="text">lastname: [[${contact.lastname}]]<br /></span>
+    <span th:inline="text">email [[${contact.email}]]<br/></span>
+    <span th:inline="text">phone: [[${contact.phone}]]<br/></span>
+    <a  th:href="@{/update/contact/{id}(id=${contact.id})}" >Update Contact</a><br/>
+</div>
+<a class="btn btn-primary btn-small" th:href="@{/exp}" role="button">Add Contact</a><br/><br/><br/>
+
+
+<h3>Education</h3>
 
 <div th:each="education : ${educations}">
 <span th:inline="text">Achievement: [[${education.achievement}]]<br/></span>
 <span th:inline="text">School: [[${education.school}]]<br /></span>
 <span th:inline="text">Graduation year: [[${education.gradyear}]]<br/></span>
 
-
-
-<a  th:href="@{/edu}" >Add Education</a><br/>
-<a  th:href="@{/}" >Go to Home</a><br/>
-<a  th:href="@{/update/{id}(id=${education.id})}" >Update Education</a><br/>
+<a  th:href="@{/update/edu/{id}(id=${education.id})}" >Update Education</a><br/>
 
 </div>
+<a  th:href="@{/edu}" >Add Education</a><br/><br/><br/>
 
-<h1>Experience</h1>
+<h3>Experience</h3>
 
 <div th:each="experience : ${experiences}">
     <span th:inline="text">Position: [[${experience.position}]]<br/></span>
     <span th:inline="text">Company: [[${experience.company}]]<br /></span>
     <span th:inline="text">Service year: [[${experience.serviceyear}]]<br/></span>
     <span th:inline="text">Duties: [[${experience.duty}]]<br/></span>
+    <a  th:href="@{/update/exp/{id}(id=${experience.id})}" >Update Experience</a><br/>
 </div>
-<a class="btn btn-primary btn-small" th:href="@{/edu}" role="button">Add Experience</a><br/>
-<a class="btn btn-primary btn-small" th:href="@{/}" role="button">Go to Home></a>
+<a class="btn btn-primary btn-small" th:href="@{/exp}" role="button">Add Experience</a><br/><br/><br/>
+
+<h3>Skill</h3>
+<div th:each="skill : ${skills}">
+    <span th:inline="text">Skill name: [[${skill.skillname}]]<br/></span>
+    <span th:inline="text">Skill Rating: [[${skill.skillrating}]]<br /></span>
+
+    <a  th:href="@{/update/skill/{id}(id=${skill.id})}" >Update Contact</a><br/>
+</div>
+<a class="btn btn-primary btn-small" th:href="@{/exp}" role="button">Add Contact</a><br/><br/><br/>
+
+
+
+<h3>Reference Information</h3>
+<div th:each="reference : ${references}">
+    <span th:inline="text">firstname: [[${reference.firstname}]]<br/></span>
+    <span th:inline="text">lastname: [[${reference.lastname}]]<br /></span>
+    <span th:inline="text">email [[${reference.email}]]<br/></span>
+    <span th:inline="text">phone: [[${reference.phone}]]<br/></span>
+    <a  th:href="@{/update/reference/{id}(id=${reference.id})}" >Update Reference</a><br/>
+</div>
+<a class="btn btn-primary btn-small" th:href="@{/refer}" role="button">Add Reference</a><br/><br/><br/>
 
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
