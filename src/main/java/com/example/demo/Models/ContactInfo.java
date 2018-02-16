@@ -1,6 +1,7 @@
 package com.example.demo.Models;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,16 +15,16 @@ public class ContactInfo {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
 
-    // @NotEmpty
+    @NotEmpty
     private String firstname;
 
-    // @NotEmpty
+     @NotEmpty
     private String lastname;
 
-    //@NotEmpty
+    @NotEmpty
     private String email;
 
-    // @NotEmpty
+    @NotEmpty
     private String phone;
 
     public ContactInfo() {

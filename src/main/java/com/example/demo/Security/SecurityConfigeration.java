@@ -31,8 +31,8 @@ public class SecurityConfigeration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("summary","/","/login","/h2-console/**","/registration").permitAll()
-//                .antMatchers("/edu","/exp","/skill","/reference","/display","contact").access("hasAuthority('ADMIN')")
-//               .antMatchers("/display").access("hasAuthority('USER')")
+                .antMatchers("/edu","/exp","/skill","/refer","/contact").access("hasAuthority('ADMIN')")
+               .antMatchers("/display").access("hasAuthority('USER') or hasAuthority('ADMIN')")
                .anyRequest()
                 .authenticated()
                 .and()
@@ -56,8 +56,8 @@ public class SecurityConfigeration extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception{
         auth.inMemoryAuthentication()
-//                .withUser("admin").password("password").authorities("ADMIN")
-//                .and()
+              .withUser("admin").password("password").authorities("ADMIN")
+                .and()
                 .withUser("user").password("password").authorities("USER");
         auth
                 .userDetailsService(userDetailsServiceBean());

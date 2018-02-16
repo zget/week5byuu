@@ -51,11 +51,6 @@ public class HomeController {
         return "login";
     }
 
-    @RequestMapping("/registration")
-    public String signup(){
-
-        return "registration";
-    }
 
     @GetMapping("/edu")
     public String loadEduform(Model model){
@@ -228,11 +223,6 @@ public class HomeController {
     }
 
 
-    @GetMapping("/login")
-    public String newUserLogin(Model model){
-        model.addAttribute("user", new User());
-        return "login";
-    }
 
 
 
