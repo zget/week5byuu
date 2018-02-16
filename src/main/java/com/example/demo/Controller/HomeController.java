@@ -1,6 +1,6 @@
-package com.example.demo;
+package com.example.demo.Controller;
 
-
+import com.example.demo.Security.*;
 import com.example.demo.Models.*;
 import com.example.demo.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +14,12 @@ import javax.validation.Valid;
 @Controller
 public class HomeController {
 
+
     @Autowired
     EduRepository eduRepository;
 
     @Autowired
-    ExpRepository  expRepository;
+    ExpRepository expRepository;
 
     @Autowired
     ContactRepository contactRepository;
@@ -28,6 +29,15 @@ public class HomeController {
 
     @Autowired
     ReferenceRepository referenceRepository;
+
+    @Autowired
+    private UserService userService;
+
+
+    @RequestMapping("/login")
+    public String showLogin(Model model) {
+        return "login";
+    }
 
     @RequestMapping("/")
     public String index(){
@@ -39,9 +49,9 @@ public class HomeController {
     @GetMapping("/edu")
     public String loadEduform(Model model){
 
-       model.addAttribute("education", new Education());
+        model.addAttribute("education", new Education());
 
-       return "Eduform";
+        return "Eduform";
     }
 
     @PostMapping("/edu")
@@ -176,7 +186,31 @@ public class HomeController {
 
         return "Display";
     }
-//
+
+
+    @GetMapping("/registration")
+    public String newUser(Model model){
+        model.addAttribute("user", new User());
+        return "Registration";
+    }
+
+
+    @PostMapping("/registration")
+    public String processUser(@Valid @ModelAttribute("user") User user, BindingResult result, Model model){
+        if(result.hasErrors()){
+            return "Registration";
+        }
+        userService.saveUser(user);
+        return "redirect:/";
+    }
+
+
+
 
 
 }
+
+
+
+
+
