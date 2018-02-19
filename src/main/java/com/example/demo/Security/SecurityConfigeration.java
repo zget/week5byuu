@@ -36,11 +36,16 @@ public class SecurityConfigeration extends WebSecurityConfigurerAdapter {
                .anyRequest()
                 .authenticated()
                 .and()
-                .formLogin().loginPage("/login").permitAll()
+                .formLogin().loginPage("/myLoginPage")
+                .loginProcessingUrl("/loginprocess")
+                .permitAll()
 
                 .and()
-                .logout().logoutRequestMatcher(
-                        new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll()
+//                .logout().logoutRequestMatcher(
+//                        new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll()
+                .logout().permitAll()
+                .and()
+                .exceptionHandling().accessDeniedPage("/access-denied")
                 .and()
                 .httpBasic();
         http

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 public class HomeController {
@@ -39,16 +40,28 @@ public class HomeController {
     private UserService userService;
 
 
-
-    @RequestMapping("/")
-    public String index(){
-
-        return "index";
+   // @ResponseBody
+    @RequestMapping(value="/", method=RequestMethod.GET)
+    public String index(HttpServletRequest request){
+        Principal principal = request.getUserPrincipal();
+        System.out.println(principal.getName());
+        if(principal.getName().equals("admin"))
+            return "index";
+        else
+            return "Display";
     }
-    @RequestMapping("/login")
+
+
+    @RequestMapping("/myLoginPage")
     public String login(){
 
-        return "login";
+        return "myLoginPage";
+    }
+
+    @RequestMapping("/access-denied")
+    public String accessDenied(){
+
+        return "accessDenied";
     }
 
 
@@ -219,7 +232,7 @@ public class HomeController {
         }
         userService.saveUser(user);
         model.addAttribute("message", "User account Successfully Created");
-        return "redirect:/login";
+        return "redirect:/myLoginPage";
     }
 
 
