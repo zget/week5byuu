@@ -3,8 +3,8 @@ package com.example.demo.Controller;
 import com.example.demo.Security.*;
 import com.example.demo.Models.*;
 import com.example.demo.Repositories.*;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.management.relation.Role;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -36,19 +37,24 @@ public class HomeController {
     @Autowired
     ReferenceRepository referenceRepository;
 
+
     @Autowired
-    private UserService userService;
+    RoleRepository roleRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
 
    // @ResponseBody
     @RequestMapping(value="/", method=RequestMethod.GET)
-    public String index(HttpServletRequest request){
-        Principal principal = request.getUserPrincipal();
-        System.out.println(principal.getName());
-        if(principal.getName().equals("admin"))
-            return "index";
-        else
-            return "Display";
+    public String index(Authentication auth){
+       // Principal principal = request.getUserPrincipal();
+        //System.out.println(principal.getName());
+        System.out.println(auth.getName()+" authorities:"+auth.getAuthorities().toString());
+//        if(principal.getName().equalsIgnoreCase("admin"))
+//            return "index";
+//        else
+           return "index";
     }
 
 
@@ -226,11 +232,30 @@ public class HomeController {
 
 
     @PostMapping("/registration")
-    public String processUser(@Valid @ModelAttribute("user") User user, BindingResult result, Model model){
+    public String processUser(@Valid @ModelAttribute("user") User user, @RequestParam("selectedRole") String selectedRole, BindingResult result, Model model){
         if(result.hasErrors()){
             return "Registration";
         }
-        userService.saveUser(user);
+        System.out.println(selectedRole);
+
+        switch (selectedRole)
+        {
+            case "MANAGER":
+                user.addRole(roleRepository.findRoleByRole("MANAGER"));
+
+            case "APPLICANT":
+                user.addRole(roleRepository.findRoleByRole("APPLICANT"));
+
+            case "ADMIN":
+                user.addRole(roleRepository.findRoleByRole("ADMIN"));
+
+            default:
+                user.addRole(roleRepository.findRoleByRole("ADMIN"));
+
+        }
+
+        userRepository.save(user);
+      //  userService.saveUser(user);
         model.addAttribute("message", "User account Successfully Created");
         return "redirect:/myLoginPage";
     }

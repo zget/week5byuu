@@ -31,8 +31,8 @@ public class SecurityConfigeration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("summary","/","/login","/h2-console/**","/registration").permitAll()
-                .antMatchers("/edu","/exp","/skill","/refer","/contact").access("hasAuthority('ADMIN')")
-               .antMatchers("/display").access("hasAuthority('USER') or hasAuthority('ADMIN')")
+               .antMatchers("/edu","/exp","/skill","/refer","/contact").access("hasAuthority('ADMIN')")
+               .antMatchers("/refer").access("hasAuthority('APPLICANT') ")
                .anyRequest()
                 .authenticated()
                 .and()

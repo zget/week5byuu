@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
@@ -20,10 +21,11 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
+                  <span sec:authorize="isAnonymous()">
                 <li class="nav-item ">
                     <a class="nav-link" th:href="@{/summary}">Summary</a>
                 </li>
-
+                  </span>
 
                 <li class="nav-item ">
                     <a class="nav-link" th:href="@{/contact}">Contact</a>
@@ -43,7 +45,7 @@
                     <a class="nav-link" th:href="@{/refer}">Reference</a>
                 </li>
 
-
+                <span sec:authorize="isAuthenticated()">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         View
@@ -54,7 +56,7 @@
                     </div>
                 </li>
 
-
+                </span>
 
             </ul>
 
