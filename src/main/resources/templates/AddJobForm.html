@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+
+<form
+        action="#"
+        th:action="@{/addjob}"
+        th:object="${job}"
+        method="post">
+    <input type="hidden" th:field="*{id}" />
+
+    Position : <input type="text" th:field="*{position}" />
+    <span th:if="${#fields.hasErrors('position')}"
+          th:errors="*{position}"></span><br />
+
+    organization : <input type="text" th:field="*{organization}" />
+    <span th:if="${#fields.hasErrors('descrption')}"
+          th:errors="*{descrption}"></span><br />
+
+    descrption : <input type="text" th:field="*{descrption}" />
+    <span th:if="${#fields.hasErrors('descrption')}"
+          th:errors="*{descrption}"></span><br />
+
+    Duty : <input type="text" th:field="*{duty}" />
+    <span th:if="${#fields.hasErrors('duty')}"
+          th:errors="*{duty}"></span><br />
+
+    <input type="submit" value="Submit" />
+
+</form>
+
+
+
+</body>
+</html>
