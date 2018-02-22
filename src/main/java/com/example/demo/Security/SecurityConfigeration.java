@@ -30,9 +30,9 @@ public class SecurityConfigeration extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers("summary","/","/login","/h2-console/**","/registration").permitAll()
-               .antMatchers("/edu","/exp","/skill","/refer","/contact").access("hasAuthority('ADMIN')")
-               .antMatchers("/refer").access("hasAuthority('APPLICANT') ")
+                .antMatchers("/summary","/","/login","/h2-console/**","/registration").permitAll()
+               .antMatchers("/edu","/exp","/skill","/refer","/contact").access("hasAuthority('APPLICANT')")
+                .antMatchers("/coverletter","/display").access("hasAnyAuthority('EMPLOYER','APPLICANT') ")
                .anyRequest()
                 .authenticated()
                 .and()
@@ -61,9 +61,14 @@ public class SecurityConfigeration extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception{
         auth.inMemoryAuthentication()
-              .withUser("admin").password("password").authorities("ADMIN")
+              .withUser("app").password("pwd").authorities("APPLICANT")
                 .and()
-                .withUser("user").password("password").authorities("USER");
+                .withUser("emp").password("pwd").authorities("EMPLOYER")
+                .and()
+                .withUser("z").password("pwd").authorities("APPLICANT");
+
+
+
         auth
                 .userDetailsService(userDetailsServiceBean());
     }

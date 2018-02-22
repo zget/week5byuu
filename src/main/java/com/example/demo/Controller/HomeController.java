@@ -5,18 +5,12 @@ import com.example.demo.Models.*;
 import com.example.demo.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.management.relation.Role;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.security.Principal;
 
 @Controller
 public class HomeController {
@@ -46,7 +40,7 @@ public class HomeController {
 
 
    // @ResponseBody
-    @RequestMapping(value="/", method=RequestMethod.GET)
+    @RequestMapping("/")
     public String index(Authentication auth){
        // Principal principal = request.getUserPrincipal();
         //System.out.println(principal.getName());
@@ -55,6 +49,12 @@ public class HomeController {
 //            return "index";
 //        else
            return "index";
+    }
+
+    @RequestMapping("/employerPage")
+    public String displayAdminPage(){
+
+     return "EmployerPage";
     }
 
 
@@ -246,11 +246,11 @@ public class HomeController {
             case "APPLICANT":
                 user.addRole(roleRepository.findRoleByRole("APPLICANT"));
 
-            case "ADMIN":
-                user.addRole(roleRepository.findRoleByRole("ADMIN"));
+            case "EMPLOYER":
+                user.addRole(roleRepository.findRoleByRole("EMPLOYER"));
 
             default:
-                user.addRole(roleRepository.findRoleByRole("ADMIN"));
+                user.addRole(roleRepository.findRoleByRole("EMPLOYER"));
 
         }
 
