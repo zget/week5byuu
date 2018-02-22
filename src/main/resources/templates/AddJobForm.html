@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
 </head>
 <body>
-
 
 <form
         action="#"
@@ -14,27 +13,30 @@
         method="post">
     <input type="hidden" th:field="*{id}" />
 
-    Position : <input type="text" th:field="*{position}" />
+    position : <input type="text" th:field="*{position}" />
     <span th:if="${#fields.hasErrors('position')}"
           th:errors="*{position}"></span><br />
 
     organization : <input type="text" th:field="*{organization}" />
-    <span th:if="${#fields.hasErrors('descrption')}"
-          th:errors="*{descrption}"></span><br />
+    <span th:if="${#fields.hasErrors('organization')}"
+          th:errors="*{organization}"></span><br />
 
     descrption : <input type="text" th:field="*{descrption}" />
     <span th:if="${#fields.hasErrors('descrption')}"
           th:errors="*{descrption}"></span><br />
 
-    Duty : <input type="text" th:field="*{duty}" />
-    <span th:if="${#fields.hasErrors('duty')}"
-          th:errors="*{duty}"></span><br />
+    desiredSkill : <input type="text" th:field="*{desiredSkill}" />
+    <span th:if="${#fields.hasErrors('desiredSkill')}"
+          th:errors="*{desiredSkill}"></span><br />
+
+    extraSkill : <input type="text" th:field="*{extraSkill}" />
+    <span th:if="${#fields.hasErrors('extraSkill')}"
+          th:errors="*{extraSkill}"></span><br />
+
 
     <input type="submit" value="Submit" />
 
 </form>
-
-
 
 </body>
 </html>

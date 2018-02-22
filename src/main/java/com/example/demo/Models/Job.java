@@ -20,9 +20,22 @@ public class Job {
 
     private  String descrption;
 
-    ArrayList<String> desiredSkill;
+    private String desiredSkill;
+    private ArrayList<String> extraSkill;
 
     public Job() {
+    }
+
+    public Job(ArrayList<String> extraSkill) {
+        this.extraSkill = extraSkill;
+    }
+
+    public ArrayList<String> getExtraSkill() {
+        return extraSkill;
+    }
+
+    public void setExtraSkill(ArrayList<String> extraSkill) {
+        this.extraSkill = extraSkill;
     }
 
     public long getId() {
@@ -57,11 +70,11 @@ public class Job {
         this.descrption = descrption;
     }
 
-    public ArrayList<String> getDesiredSkill() {
+    public String getDesiredSkill() {
         return desiredSkill;
     }
 
-    public void setDesiredSkill(ArrayList<String> desiredSkill) {
+    public void setDesiredSkill(String desiredSkill) {
         this.desiredSkill = desiredSkill;
     }
 }

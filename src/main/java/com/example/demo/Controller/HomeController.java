@@ -38,6 +38,36 @@ public class HomeController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    JobRepository jobRepository;
+
+    @Autowired
+    ApplicantRepository applicantRepository;
+
+
+    @GetMapping("/applicant")
+    public String loadApplicantform(Model model){
+
+
+        model.addAttribute("Applicant", new Applicant(new Education()));
+
+        return "ApplicantForm";
+    }
+
+    @PostMapping("/applicant")
+    public String processApplicantform(@Valid @ModelAttribute("applicant") Applicant applicant, BindingResult result, Model model){
+
+        if(result.hasErrors())
+            return "ApplicantForm";
+        applicantRepository.save(applicant);
+        model.addAttribute("applicant", applicantRepository);
+        return "redirect:/";
+    }
+
+
+
+
+
 
    // @ResponseBody
     @RequestMapping("/")
@@ -71,6 +101,41 @@ public class HomeController {
     }
 
 
+    @GetMapping("/addjob")
+    public String loadEJobform(Model model){
+
+        model.addAttribute("job", new Job());
+
+        return "AddJobForm";
+    }
+
+    @PostMapping("/addjob")
+    public String processJobform(@Valid @ModelAttribute("job") Job job, BindingResult result, Model model){
+
+        if(result.hasErrors())
+            return "AddJobForm";
+
+        jobRepository.save(job);
+        model.addAttribute("job", jobRepository);
+        return "redirect:/";
+    }
+    @RequestMapping("/update/job/{id}")
+    public String updatejob(@PathVariable("id") long id, Model model) {
+        model.addAttribute("job", jobRepository.findOne(id));
+
+        return "AddJobForm";
+    }
+
+
+    @RequestMapping("/displayjob")
+    public String jobDisplayMethod(Model model){
+
+        model.addAttribute("jobs", jobRepository.findAll());
+
+        return "jobDisplay";
+    }
+
+
     @GetMapping("/edu")
     public String loadEduform(Model model){
 
@@ -89,7 +154,28 @@ public class HomeController {
         return "redirect:/";
     }
 
-    @GetMapping("/contact")
+//    @RequestMapping("/addskill/job/{id}")
+//    public String addJobSkillForm(@PathVariable("id") long id, Model model) {
+//      Job newJob= jobRepository.findOne(id);
+//
+//        newJob.getExtraSkill().add(addedSkill);
+//        jobRepository.save(newJob);
+//        model.addAttribute("job", jobRepository.findAll());
+//       return  "redirect:/";
+//    }
+//
+//    @RequestMapping("/addskill/job/{id")
+//    public String addedSkill(Model model){
+//
+//        model.addAttribute("jobs", jobRepository.findAll());
+//
+//        return "jobDisplay";
+//    }
+
+
+
+
+      @GetMapping("/contact")
     public String loadContactform(Model model){
 
         model.addAttribute("contact", new ContactInfo());
@@ -241,7 +327,7 @@ public class HomeController {
         switch (selectedRole)
         {
             case "MANAGER":
-                user.addRole(roleRepository.findRoleByRole("MANAGER"));
+                user.addRole(roleRepository.findRoleByRole("RECRUITER"));
 
             case "APPLICANT":
                 user.addRole(roleRepository.findRoleByRole("APPLICANT"));

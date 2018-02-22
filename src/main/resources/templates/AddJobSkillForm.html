@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"   xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<form
+        action="#"
+        th:action="@{/addjob}"
+        th:object="${job}"
+        method="post">
+    <input type="hidden" th:field="*{id}" />
+    extraSkill : <input type="text" th:field="*{extraSkill}" />
+    <span th:if="${#fields.hasErrors('extraSkill')}"
+          th:errors="*{extraSkill}"></span><br />
+
+
+    <input type="submit" value="Submit" />
+
+</form>
+</body>
+</html>
