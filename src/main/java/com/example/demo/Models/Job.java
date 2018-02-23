@@ -21,7 +21,7 @@ public class Job {
     private String catagory;
 
     @ManyToMany
-    private Set<Skill> skillSet;
+    public Set<Skill> skillSet;
 
     public Job() {
         this.skillSet= new HashSet<Skill>();

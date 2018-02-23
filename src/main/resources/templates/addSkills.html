@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>Skill</h3>
+<div th:each="skill : ${skills}">
+    <span th:inline="text">Skill name: [[${skill.skillname}]]<br/></span>
+    <span th:inline="text">Skill Rating: [[${skill.skillrating}]]<br /></span>
+
+    <a  th:href="@{/add/skilltoJob/{id}/{idskill}(id=${currentjob.id}, idskill=${skill.id})}" >Add this skill</a><br/>
+</div>
+<br/><br/><br/>
+
+
+
+</body>
+</html>

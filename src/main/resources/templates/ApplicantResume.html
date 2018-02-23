@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+
+</head>
+<body>
+
+<div th:replace="index::navlinks"></div>
+
+<h1>Resume</h1>
+<h3>Contact Information</h3>
+<div th:each="contact : ${contacts}">
+    <span th:inline="text">firstname: [[${contact.firstname}]]<br/></span>
+    <span th:inline="text">lastname: [[${contact.lastname}]]<br /></span>
+    <span th:inline="text">email [[${contact.email}]]<br/></span>
+    <span th:inline="text">phone: [[${contact.phone}]]<br/></span>
+
+</div><br/>
+
+
+
+<h3>Education</h3>
+
+<div th:each="education : ${educations}">
+    <span th:inline="text">Achievement: [[${education.achievement}]]<br/></span>
+    <span th:inline="text">School: [[${education.school}]]<br /></span>
+    <span th:inline="text">Graduation year: [[${education.gradyear}]]<br/></span>
+
+
+
+</div>
+<br/>
+
+<h3>Experience</h3>
+
+<div th:each="experience : ${experiences}">
+    <span th:inline="text">Position: [[${experience.position}]]<br/></span>
+    <span th:inline="text">Company: [[${experience.company}]]<br /></span>
+    <span th:inline="text">Service year: [[${experience.serviceyear}]]<br/></span>
+    <span th:inline="text">Duties: [[${experience.duty}]]<br/></span>
+
+</div>
+<br/>
+
+<h3>Skill</h3>
+<div th:each="skill : ${skills}">
+    <span th:inline="text">Skill name: [[${skill.skillname}]]<br/></span>
+    <span th:inline="text">Skill Rating: [[${skill.skillrating}]]<br /></span>
+
+
+</div>
+<br/>
+
+
+
+<h3>Reference Information</h3>
+<div th:each="reference : ${references}">
+    <span th:inline="text">firstname: [[${reference.firstname}]]<br/></span>
+    <span th:inline="text">lastname: [[${reference.lastname}]]<br /></span>
+    <span th:inline="text">email [[${reference.email}]]<br/></span>
+    <span th:inline="text">phone: [[${reference.phone}]]<br/></span>
+
+</div>
+<br/>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

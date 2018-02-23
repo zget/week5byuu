@@ -18,13 +18,10 @@
     <span th:inline="text">descrption [[${job.descrption}]]<br/></span>
     <span th:inline="text">catagory: [[${job.catagory}]]<br/></span>
     <div th:each="skill : ${job.skillSet}">
-    <span th:inline="text">Skill: [[${skill.skillname}]]<br/></span>
-    </div>
+        <span th:inline="text">Skill: [[${skill.skillname}]]<br/></span>
 
-    <a  th:href="@{/addnewskill/job/{id} (id=${job.id})}" >add skill</a>
-
-    </div>
-
+</div>
+</div>
 <br/><br/><br/>
 
 

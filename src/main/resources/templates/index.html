@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="www.thymeleaf.org" xmlns:th="http://www.thymeleaf.org" xmlns:sec="www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
     <meta charset="UTF-8"/>
@@ -11,7 +11,10 @@
 <body>
 
 <div th:fragment="navlinks">
+
+    <p> current loged in user is:   <span th:text="${#authentication.getName()}"></span></p>
 <nav class="navbar navbar-expand-lg navbar-light bg-light" >
+
 
         <!--<img class="navbar-brand" src="logo.png" alt="logo"/>-->
     <!--<div> <img src="/image/mypic.jpg" width="100" height="100" class="d-inline-block align-top" alt="logo"/></div>-->
@@ -21,7 +24,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                  <!--<span sec:authorize="isAnonymous()">-->
+
                 <th:block sec:authorize="hasAuthority('APPLICANT')">
                 <li class="nav-item ">
                     <a class="nav-link" th:href="@{/summary}">Summary</a>
@@ -45,32 +48,46 @@
                 <li class="nav-item ">
                     <a class="nav-link"  th:href="@{/refer}">Reference</a>
                 </li>
+                    <li class="nav-item ">
+                        <a class="nav-link"  th:href="@{/jobinfo}">Job Details</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >View</a>
 
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" th:href="@{/display}">Completed Resume</a>
+                            <a class="dropdown-item" th:href="@{/coverletter}">Cover Letter</a>
+                        </div>
+                    </li>
+
+                </th:block>
+
+                <th:block sec:authorize="hasAuthority('RECRUITER')">
                     <li class="nav-item ">
                         <a class="nav-link"  th:href="@{/addjob}">Post Job</a>
                     </li>
+                          <li class="nav-item ">
+                              <a class="nav-link"  th:href="@{/displayjob}">Job Details</a>
 
+                          </li>
+                    <li class="nav-item ">
+                        <a class="nav-link"  th:href="@{/completeResume}">Applicant Resume</a>
 
-                <li class="nav-item ">
-                </th:block>
-                <th:block>
-                    <a class="nav-link"  th:href="@{/employerPage}">EMPLOYER PAGE</a>
-                    <a class="nav-link"  th:href="@{/displayjob}">Job Details</a>
-                </li>
-                </th:block>
-                <!--<span sec:authorize="isAuthenticated()">-->
-                <th:block sec:authorize="hasAuthority('APPLICANT')">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >View</a>
+                    </li>
 
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" th:href="@{/display}">Completed Resume</a>
-                        <a class="dropdown-item" th:href="@{/coverletter}">Cover Letter</a>
-                    </div>
-                </li>
                 </th:block>
 
+                <th:block sec:authorize="hasAuthority('EMPLOYER')">
+                    <li class="nav-item ">
+                        <a class="nav-link"  th:href="@{/completeResume}">Applicant Resume</a>
+
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link"  th:href="@{/jobinfo}">Job Details</a>
+
+                    </li>
+                </th:block>
 
             </ul>
 

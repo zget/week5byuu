@@ -48,13 +48,10 @@ public class HomeController {
 
    // @ResponseBody
     @RequestMapping("/")
-    public String index(Authentication auth){
-       // Principal principal = request.getUserPrincipal();
-        //System.out.println(principal.getName());
-        System.out.println(auth.getName()+" authorities:"+auth.getAuthorities().toString());
-//        if(principal.getName().equalsIgnoreCase("admin"))
-//            return "index";
-//        else
+    public String index(Model model, Authentication auth){
+        auth.getName();
+        System.out.println(auth.getName());
+        model.addAttribute("user",auth.getName());
            return "index";
     }
 
@@ -87,7 +84,8 @@ public class HomeController {
     }
 
     @PostMapping("/addjob")
-    public String processJobform(@Valid @ModelAttribute("job") Job job, BindingResult result, Model model){
+    public String processJobform(@Valid @ModelAttribute("job") Job job,
+                                 BindingResult result, Model model){
 
         if(result.hasErrors())
             return "AddJobForm";
@@ -96,11 +94,28 @@ public class HomeController {
         model.addAttribute("job", jobRepository);
         return "redirect:/";
     }
-    @RequestMapping("/update/job/{id}")
+    @GetMapping("/addnewskill/job/{id}")
     public String updatejob(@PathVariable("id") long id, Model model) {
-        model.addAttribute("job", jobRepository.findOne(id));
+      //  Job myjob=jobRepository.findOne(id);
+        model.addAttribute("currentjob", jobRepository.findOne(id));
 
-        return "AddJobForm";
+        model.addAttribute("skills", skillRepository.findAll());
+       return "addSkills";
+    }
+
+    @RequestMapping("/add/skilltoJob/{id}/{idskill}")
+    public String addskilltojob(@PathVariable("id") long id, @PathVariable("idskill") long idskill,
+                                @ModelAttribute("currentjob") Job job,
+                                Model model){
+        job=jobRepository.findOne(id);
+        jobRepository.save(job);
+        Skill myskill=skillRepository.findOne(idskill);
+        skillRepository.save(myskill);
+        job.AddSkill(myskill);
+        jobRepository.save(job);
+       // System.out.println(job.getSkillSet().toString());
+        model.addAttribute("job", jobRepository.findAll());
+        return "redirect:/displayjob";
     }
 
 //    @RequestMapping("/addskill/job/{id}")
@@ -120,7 +135,13 @@ public class HomeController {
 
         return "jobDisplay";
     }
+    @RequestMapping("/jobinfo")
+    public String jobDisplayInfo(Model model){
 
+        model.addAttribute("jobs", jobRepository.findAll());
+
+        return "appjobview";
+    }
 
     @GetMapping("/edu")
     public String loadEduform(Model model){
@@ -131,8 +152,11 @@ public class HomeController {
     }
 
     @PostMapping("/edu")
-    public String processEduform(@Valid @ModelAttribute("education") Education education, BindingResult result, Model model){
+    public String processEduform(@Valid @ModelAttribute("education") Education education,
+                                 BindingResult result, Model model){
 
+
+    //education.setperson(use)
         if(result.hasErrors())
             return "Eduform";
         eduRepository.save(education);
@@ -267,6 +291,18 @@ public class HomeController {
         model.addAttribute("references", referenceRepository.findAll());
 
         return "Display";
+    }
+
+    @RequestMapping("/completeResume")
+    public String applicantResume( Model model) {
+
+        model.addAttribute("educations", eduRepository.findAll());
+        model.addAttribute("experiences", expRepository.findAll());
+        model.addAttribute("contacts", contactRepository.findAll());
+        model.addAttribute("skills", skillRepository.findAll());
+        model.addAttribute("references", referenceRepository.findAll());
+
+        return "ApplicantResume";
     }
 
     @RequestMapping("/summary")

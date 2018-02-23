@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<h3>Education</h3>
+
+<div th:each="education : ${educations}">
+    <span th:inline="text">Achievement: [[${education.achievement}]]<br/></span>
+    <span th:inline="text">School: [[${education.school}]]<br /></span>
+    <span th:inline="text">Graduation year: [[${education.gradyear}]]<br/></span>
+
+    <a  th:href="@{/update/edu/{id}(id=${education.id})}" >Update Education</a><br/>
+
+
+<br/><br/><br/>
+
+</div>
+
+</body>
+</html>

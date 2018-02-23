@@ -31,9 +31,12 @@ public class SecurityConfigeration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/summary","/","/login","/h2-console/**","/registration").permitAll()
-               .antMatchers("/edu","/exp","/skill","/refer","/contact").access("hasAuthority('APPLICANT')")
-                .antMatchers("/coverletter","/display").access("hasAnyAuthority('EMPLOYER','APPLICANT') ")
-               .anyRequest()
+               .antMatchers("/coverletter","/display","/edu","/exp","/skill","/refer","/contact").access("hasAuthority('APPLICANT')")
+                .antMatchers().access("hasAnyAuthority('EMPLOYER','APPLICANT') ")
+                .antMatchers("/addjob","/addnewskill/job/{id}","/displayjob").access("hasAuthority('RECRUITER') ")
+
+
+                .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin().loginPage("/myLoginPage")
