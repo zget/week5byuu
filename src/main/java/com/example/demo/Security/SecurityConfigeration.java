@@ -65,7 +65,7 @@ public class SecurityConfigeration extends WebSecurityConfigurerAdapter {
                 .and()
                 .withUser("emp").password("pwd").authorities("EMPLOYER")
                 .and()
-                .withUser("z").password("pwd").authorities("APPLICANT");
+                .withUser("rec").password("pwd").authorities("RECRUITER");
 
 
 

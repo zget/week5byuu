@@ -20,7 +20,7 @@ public class Job {
 
     private String catagory;
 
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany
     private Set<Skill> skillSet;
 
     public Job() {

@@ -1,7 +1,9 @@
 package com.example.demo.Security;
 
+import com.example.demo.Models.Education;
 import com.example.demo.Models.Job;
 import com.example.demo.Models.Skill;
+import com.example.demo.Repositories.EduRepository;
 import com.example.demo.Repositories.JobRepository;
 import com.example.demo.Repositories.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +25,18 @@ public class DataLoader implements CommandLineRunner {
     @Autowired
     SkillRepository skillRepository;
 
+    @Autowired
+    EduRepository eduRepository;
+
     @Override
     public void run(String... strings) throws Exception{
         System.out.println("Loading data....");
 
         roleRepository.save(new Role("APPLICANT")) ;
         roleRepository.save(new Role("EMPLOYER")) ;
-        roleRepository.save(new Role("MANAGER")) ;
+        roleRepository.save(new Role("RECRUITER")) ;
+
+        Role myRole= roleRepository.findRoleByRole("APPLICANT");
 
         skillRepository.save(new Skill("java",4));
         skillRepository.save(new Skill("php",3));
@@ -43,6 +50,16 @@ public class DataLoader implements CommandLineRunner {
                 "sytem upgrading","Full time");
         job1.AddSkill(skill1);
         jobRepository.save(job1);
+
+        Education myEdu= new Education("BSc", "Harvard", 2010);
+        eduRepository.save(myEdu);
+
+        User testUser=new User("test@gmail.com","test","gech",
+                "dere",true, "test");
+        testUser.addUserSkill(skill1);
+        testUser.addRole(myRole);
+        testUser.addUserEducation(myEdu);
+        userRepository.save(testUser);
 
 
         Job job2= new Job("full stack developer", "JJ PLC",

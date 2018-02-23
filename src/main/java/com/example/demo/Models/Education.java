@@ -1,13 +1,13 @@
 package com.example.demo.Models;
 
 
+import com.example.demo.Security.User;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Collection;
+import java.util.HashSet;
 
 @Entity
 public class Education {
@@ -25,7 +25,19 @@ public class Education {
     //@NotEmpty
     private int gradyear;
 
+    @ManyToMany(mappedBy= "educations")
+    private Collection<User> userEducation;
+
     public Education() {
+
+        this.userEducation=new HashSet<User>();
+    }
+
+    public Education(String achievement, String school, int gradyear) {
+        this.achievement = achievement;
+        this.school = school;
+        this.gradyear = gradyear;
+        this.userEducation=new HashSet<User>();
     }
 
     public long getId() {
@@ -59,4 +71,5 @@ public class Education {
     public void setGradyear(int gradyear) {
         this.gradyear = gradyear;
     }
+
 }

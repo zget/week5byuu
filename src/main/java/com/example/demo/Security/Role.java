@@ -3,6 +3,7 @@ package com.example.demo.Security;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 
 @Entity
 public class Role {
@@ -15,12 +16,16 @@ public class Role {
     @ManyToMany(mappedBy = "roles",fetch = FetchType.LAZY)
     private Collection<User> users;
 
-    public Role(String role) {
-        this.role = role;
+    public Role() {
+
+        this.users=new HashSet<User>();
     }
 
-    public Role() {
+    public Role(String role) {
+        this.role = role;
+        this.users=new HashSet<User>();
     }
+
 
     public long getId() {
         return id;

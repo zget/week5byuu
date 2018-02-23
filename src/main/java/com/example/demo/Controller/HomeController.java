@@ -297,7 +297,7 @@ public class HomeController {
 
         switch (selectedRole)
         {
-            case "MANAGER":
+            case "RECRUITER":
                 user.addRole(roleRepository.findRoleByRole("RECRUITER"));
 
             case "APPLICANT":
@@ -306,8 +306,6 @@ public class HomeController {
             case "EMPLOYER":
                 user.addRole(roleRepository.findRoleByRole("EMPLOYER"));
 
-            default:
-                user.addRole(roleRepository.findRoleByRole("EMPLOYER"));
 
         }
 

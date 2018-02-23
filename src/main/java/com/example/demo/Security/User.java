@@ -1,5 +1,8 @@
 package com.example.demo.Security;
 
+import com.example.demo.Models.Education;
+import com.example.demo.Models.Skill;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
@@ -27,6 +30,12 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
 
+    @ManyToMany
+    private Collection<Skill> skilluser;
+    @ManyToMany
+    private Collection<Education> educations;
+
+
     public User(String email, String password, String firstName, String lastName, boolean enabled, String userName) {
         this.email = email;
         this.password = password;
@@ -34,12 +43,27 @@ public class User {
         this.lastName = lastName;
         this.enabled = enabled;
         this.userName = userName;
+        this.roles= new HashSet<Role>();
+        this.skilluser =new HashSet<Skill>();
+        this.educations=new HashSet<Education>();
     }
 
 
 
     public User() {
-        this.roles= new HashSet<>();
+        this.roles= new HashSet<Role>();
+        this.skilluser =new HashSet<Skill>();
+        this.educations=new HashSet<Education>();
+    }
+
+
+
+    public Collection<Skill> getSkilluser() {
+        return skilluser;
+    }
+
+    public void setSkilluser(Collection<Skill> skilluser) {
+        this.skilluser = skilluser;
     }
 
 
@@ -109,5 +133,12 @@ public class User {
 
     public void addRole(Role r){
         this.roles.add(r);
+    }
+    public void addUserSkill(Skill s){
+        this.skilluser.add(s);
+    }
+
+    public void addUserEducation(Education e){
+        this.educations.add(e);
     }
 }
