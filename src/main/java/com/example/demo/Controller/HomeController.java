@@ -103,15 +103,15 @@ public class HomeController {
         return "AddJobForm";
     }
 
-    @RequestMapping("/addskill/job/{id}")
-    public String addJobSkillForm(@PathVariable("id") long id, Model model) {
-      Job newJob= jobRepository.findOne(id);
-
-        newJob.getExtraSkill().add("new Skill");
-        jobRepository.save(newJob);
-        model.addAttribute("job", jobRepository.findAll());
-       return  "redirect:/";
-    }
+//    @RequestMapping("/addskill/job/{id}")
+//    public String addJobSkillForm(@PathVariable("id") long id, Model model) {
+//      Job newJob= jobRepository.findOne(id);
+//
+//        newJob.getExtraSkill().add("new Skill");
+//        jobRepository.save(newJob);
+//        model.addAttribute("job", jobRepository.findAll());
+//       return  "redirect:/";
+//    }
 
     @RequestMapping("/displayjob")
     public String jobDisplayMethod(Model model){

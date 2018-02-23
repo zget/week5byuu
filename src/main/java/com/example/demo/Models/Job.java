@@ -1,10 +1,8 @@
 package com.example.demo.Models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.ArrayList;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Job {
@@ -20,23 +18,23 @@ public class Job {
 
     private  String descrption;
 
-    private String desiredSkill;
-    private ArrayList<String> extraSkill;
+    private String catagory;
+
+    @ManyToMany(fetch=FetchType.EAGER)
+    private Set<Skill> skillSet;
 
     public Job() {
+        this.skillSet= new HashSet<Skill>();
     }
 
-    public Job(ArrayList<String> extraSkill) {
-        this.extraSkill = extraSkill;
+    public Job(String position, String organization, String descrption, String catagory) {
+        this.position = position;
+        this.organization = organization;
+        this.descrption = descrption;
+        this.catagory = catagory;
+        this.skillSet= new HashSet<Skill>();
     }
 
-    public ArrayList<String> getExtraSkill() {
-        return extraSkill;
-    }
-
-    public void setExtraSkill(ArrayList<String> extraSkill) {
-        this.extraSkill = extraSkill;
-    }
 
     public long getId() {
         return id;
@@ -70,11 +68,21 @@ public class Job {
         this.descrption = descrption;
     }
 
-    public String getDesiredSkill() {
-        return desiredSkill;
+    public String getCatagory() {
+        return catagory;
     }
 
-    public void setDesiredSkill(String desiredSkill) {
-        this.desiredSkill = desiredSkill;
+    public void setCatagory(String catagory) {
+        this.catagory = catagory;
     }
+
+    public Set<Skill> getSkillSet() {
+        return skillSet;
+    }
+
+    public void setSkillSet(Set<Skill> skillSet) {
+        this.skillSet = skillSet;
+    }
+
+    public void AddSkill(Skill s){this.skillSet.add(s);}
 }

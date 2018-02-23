@@ -16,8 +16,8 @@
     <span th:inline="text">position: [[${job.position}]]<br/></span>
     <span th:inline="text">organization: [[${job.organization}]]<br /></span>
     <span th:inline="text">descrption [[${job.descrption}]]<br/></span>
-    <span th:inline="text">desiredSkill: [[${job.desiredSkill}]]<br/></span>
-    <span th:inline="text">extraSkill: [[${job.extraSkill}]]<br/></span>
+    <span th:inline="text">catagory: [[${job.catagory}]]<br/></span>
+
     <a  th:href="@{/update/job/{id}(id=${job.id})}" >Update job</a>
     <a  th:href="@{/addskill/job/{id}(id=${job.id})}" >Extra skill</a>
 </div><br/><br/><br/>

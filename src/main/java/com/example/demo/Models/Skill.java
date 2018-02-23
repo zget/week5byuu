@@ -1,12 +1,9 @@
 package com.example.demo.Models;
 
 
-import org.hibernate.validator.constraints.NotEmpty;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Skill {
@@ -15,14 +12,22 @@ public class Skill {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
 
-    //@NotEmpty
+
     private String skillname;
 
-   // @NotEmpty
     private int skillrating;
 
+    @ManyToMany(mappedBy = "skillSet", fetch = FetchType.LAZY)
+        private Set<Job> jobs;
 
     public Skill() {
+        this.jobs=new HashSet<Job>();
+    }
+
+    public Skill(String skillname, int skillrating) {
+        this.skillname = skillname;
+        this.skillrating = skillrating;
+        this.jobs=new HashSet<Job>();
     }
 
     public long getId() {

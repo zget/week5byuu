@@ -25,13 +25,10 @@
     <span th:if="${#fields.hasErrors('descrption')}"
           th:errors="*{descrption}"></span><br />
 
-    desiredSkill : <input type="text" th:field="*{desiredSkill}" />
-    <span th:if="${#fields.hasErrors('desiredSkill')}"
-          th:errors="*{desiredSkill}"></span><br />
+    catagory : <input type="text" th:field="*{catagory}" />
+    <span th:if="${#fields.hasErrors('catagory')}"
+          th:errors="*{catagory}"></span><br />
 
-    extraSkill : <input type="text" th:field="*{extraSkill}" />
-    <span th:if="${#fields.hasErrors('extraSkill')}"
-          th:errors="*{extraSkill}"></span><br />
 
 
     <input type="submit" value="Submit" />

@@ -5,4 +5,8 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface JobRepository extends CrudRepository<Job, Long> {
 
+    Job findByPosition(String position);
+
+    Job findByOrOrganization(String organization);
+
 }
