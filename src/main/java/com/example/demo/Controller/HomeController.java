@@ -41,29 +41,6 @@ public class HomeController {
     @Autowired
     JobRepository jobRepository;
 
-    @Autowired
-    ApplicantRepository applicantRepository;
-
-
-    @GetMapping("/applicant")
-    public String loadApplicantform(Model model){
-
-
-        model.addAttribute("Applicant", new Applicant(new Education()));
-
-        return "ApplicantForm";
-    }
-
-    @PostMapping("/applicant")
-    public String processApplicantform(@Valid @ModelAttribute("applicant") Applicant applicant, BindingResult result, Model model){
-
-        if(result.hasErrors())
-            return "ApplicantForm";
-        applicantRepository.save(applicant);
-        model.addAttribute("applicant", applicantRepository);
-        return "redirect:/";
-    }
-
 
 
 
@@ -126,6 +103,15 @@ public class HomeController {
         return "AddJobForm";
     }
 
+    @RequestMapping("/addskill/job/{id}")
+    public String addJobSkillForm(@PathVariable("id") long id, Model model) {
+      Job newJob= jobRepository.findOne(id);
+
+        newJob.getExtraSkill().add("new Skill");
+        jobRepository.save(newJob);
+        model.addAttribute("job", jobRepository.findAll());
+       return  "redirect:/";
+    }
 
     @RequestMapping("/displayjob")
     public String jobDisplayMethod(Model model){
@@ -154,23 +140,8 @@ public class HomeController {
         return "redirect:/";
     }
 
-//    @RequestMapping("/addskill/job/{id}")
-//    public String addJobSkillForm(@PathVariable("id") long id, Model model) {
-//      Job newJob= jobRepository.findOne(id);
 //
-//        newJob.getExtraSkill().add(addedSkill);
-//        jobRepository.save(newJob);
-//        model.addAttribute("job", jobRepository.findAll());
-//       return  "redirect:/";
-//    }
 //
-//    @RequestMapping("/addskill/job/{id")
-//    public String addedSkill(Model model){
-//
-//        model.addAttribute("jobs", jobRepository.findAll());
-//
-//        return "jobDisplay";
-//    }
 
 
 
